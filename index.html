@@ -65,13 +65,13 @@
         }
     </script>-->
 
-    <link rel="preload" as="script" href="cocos2d-js-min.js?v=9" />
+    <link rel="preload" as="script" href="cocos2d-js-min.js?v=12" />
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js').catch(function () {});
         }
     </script>
-    <link rel="stylesheet" type="text/css" href="style-mobile.css?v=9" />
+    <link rel="stylesheet" type="text/css" href="style-mobile.css?v=12" />
     <style>
         html, body { margin: 0; height: 100%; overflow: hidden; background: #ffe89d; }
         #canvasDiv { position: absolute; left: 0; top: 0; }
@@ -174,14 +174,24 @@
                 body.style.left = (vv ? Math.round(vv.offsetLeft) : 0) + "px";
                 body.style.top = (vv ? Math.round(vv.offsetTop) : 0) + "px";
             }
-            var dw = 720, dh = 1560;
-            var s = Math.min(availW / dw, availH / dh);
-            var cw = Math.round(dw * s), ch = Math.round(dh * s);
             var div = document.getElementById("canvasDiv");
+            var cw, ch, left, top;
+            if (availW <= availH) {
+                cw = Math.round(availW);
+                ch = Math.round(availH);
+                left = 0;
+                top = 0;
+            } else {
+                var s = Math.min(availW / 720, availH / 1560);
+                cw = Math.round(720 * s);
+                ch = Math.round(1560 * s);
+                left = Math.round((availW - cw) / 2);
+                top = Math.round((availH - ch) / 2);
+            }
             div.style.width = cw + "px";
             div.style.height = ch + "px";
-            div.style.left = Math.round((availW - cw) / 2) + "px";
-            div.style.top = Math.round((availH - ch) / 2) + "px";
+            div.style.left = left + "px";
+            div.style.top = top + "px";
         };
         window.addEventListener("resize", onload);
         window.addEventListener("orientationchange", onload);
@@ -253,13 +263,13 @@
 
 
 
-    <script type="text/javascript" src="ads.js?v=9"></script>
-    <script src="src/config.js?v=9" charset="utf-8"></script>
-    <script src="src/lb-config.js?v=9" charset="utf-8"></script>
-    <script src="src/leaderboard.js?v=9" charset="utf-8"></script>
-    <script src="src/bottom-table.js?v=2" charset="utf-8"></script>
+    <script type="text/javascript" src="ads.js?v=12"></script>
+    <script src="src/config.js?v=12" charset="utf-8"></script>
+    <script src="src/lb-config.js?v=12" charset="utf-8"></script>
+    <script src="src/leaderboard.js?v=12" charset="utf-8"></script>
+    <script src="src/bottom-table.js?v=3" charset="utf-8"></script>
 
-    <script src="main.js?v=9" charset="utf-8"></script>
+    <script src="main.js?v=12" charset="utf-8"></script>
 
 
     <script>
@@ -285,7 +295,7 @@
 
             var cocos2d = document.createElement('script');
             cocos2d.async = true;
-            cocos2d.src = window._CCSettings.debug ? 'cocos2d-js.js?v=9' : 'cocos2d-js-min.js?v=9';
+            cocos2d.src = window._CCSettings.debug ? 'cocos2d-js.js?v=12' : 'cocos2d-js-min.js?v=12';
 
             var engineLoaded = function() {
                 document.body.removeChild(cocos2d);
