@@ -167,7 +167,7 @@
             div.style.height = Math.round(dh * s) + "px";
         };
         window.addEventListener("resize", onload);
-        if (window.visualViewport) { window.visualViewport.addEventListener("resize", onload); }
+        window.addEventListener("orientationchange", onload);
         window.onload = function() {
             document.getElementById("block-Box").style.display = "none";
         }
