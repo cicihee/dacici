@@ -75,7 +75,8 @@ window.__adaptView = function () {
     if ("undefined" == typeof cc || !cc.view || !cc.ResolutionPolicy) return;
     var f = cc.view.getFrameSize();
     if (!f || !f.width || !f.height) return;
-    cc.view.setDesignResolutionSize(720, 1280, f.width > f.height ? cc.ResolutionPolicy.SHOW_ALL : cc.ResolutionPolicy.FIXED_WIDTH);
+    var _land = f.width > f.height;
+    cc.view.setDesignResolutionSize(_land ? 720 : 795, 1280, _land ? cc.ResolutionPolicy.SHOW_ALL : cc.ResolutionPolicy.FIXED_WIDTH);
   } catch (e) {}
 };
 window.addEventListener("resize", function () { setTimeout(function () { window.__adaptView(); }, 60); });
@@ -1239,9 +1240,25 @@ window.__require = function e(t, n, o) {
             (function () {
               var _tb = cc.find("Canvas/bgLayer/down"), _sp = _tb && _tb.getComponent(cc.Sprite);
               if (!_sp) return;
-              cc.loader.load({ url: "res/raw-assets/eb/ebdc0e91-9eb2-40b6-8211-5061a73bb542.png?v=9", type: "png" }, function (e, t) {
+              cc.loader.load({ url: "res/raw-assets/eb/ebdc0e91-9eb2-40b6-8211-5061a73bb542.png?v=12", type: "png" }, function (e, t) {
                 if (!e && t && cc.isValid(_sp)) _sp.spriteFrame = new cc.SpriteFrame(t);
               });
+            })(),
+            (function () {
+              var fix = function () {
+                try {
+                  if ("undefined" == typeof cc || !cc.view) return;
+                  var vis = cc.view.getVisibleSize(), w = Math.round(vis.width);
+                  var bg = cc.find("Canvas/bgLayer");
+                  if (bg && Math.abs(bg.width - w) > 1) { bg.width = w; bg.x = 0; }
+                  var l = cc.find("Canvas/bgLayer/left"), r = cc.find("Canvas/bgLayer/right");
+                  if (l) l.x = -Math.round(w / 2 + 30);
+                  if (r) r.x = Math.round(w / 2 + 30);
+                  var d = cc.find("Canvas/bgLayer/down");
+                  if (d && Math.abs(d.width - w) > 1) { d.width = w; d.x = 0; var bx = d.getComponent(cc.PhysicsBoxCollider); if (bx) { bx.size.width = w; bx.apply(); } }
+                } catch (e) {}
+              };
+              fix(); setInterval(fix, 800);
             })(),
             this.createOneFruit(firstFruit) // 第一个水果
         }, t.prototype.update = function (e) {
@@ -3531,7 +3548,7 @@ window.__require = function e(t, n, o) {
 
         return o(t, e), t.prototype.onLoad = function () {
         }, t.prototype.start = function () {
-          this.bianjieX = 360 - this.node.width / 2
+          this.bianjieX = cc.view.getVisibleSize().width / 2 - this.node.width / 2
         }, t.prototype.update = function (e) {
           var t = this;
           if (this.node.x < -this.bianjieX && (this.node.x = -this.bianjieX), this.node.x > this.bianjieX && (this.node.x = this.bianjieX), this.notTargetTime += e, this.returnNumber && (this.scheduleOnce(function () {
