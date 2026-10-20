@@ -1236,6 +1236,13 @@ window.__require = function e(t, n, o) {
           }).union().repeatForever().start(),
             this.lineNode.children[0].active = !1,
             this.fruitS = ["PuTaoS", "YingTaoS", "JuZiS", "NingMengS", "MiHouTaoS", "XiHongShiS", "TaoS", "BoLuoS", "YeZiS", "XiGuaS"],
+            (function () {
+              var _tb = cc.find("Canvas/bgLayer/down"), _sp = _tb && _tb.getComponent(cc.Sprite);
+              if (!_sp) return;
+              cc.loader.load({ url: "res/raw-assets/eb/ebdc0e91-9eb2-40b6-8211-5061a73bb542.png?v=9", type: "png" }, function (e, t) {
+                if (!e && t && cc.isValid(_sp)) _sp.spriteFrame = new cc.SpriteFrame(t);
+              });
+            })(),
             this.createOneFruit(firstFruit) // 第一个水果
         }, t.prototype.update = function (e) {
           a.default.GameUpdateCtrl, this.lineNode.children[0].y - n.Instance.fruitHeigth < 100 && this.lineNode.children[0].y - n.Instance.fruitHeigth >= 0 && (this.lineNode.children[0].active = !0), this.lineNode.children[0].y - n.Instance.fruitHeigth > 100 && (this.lineNode.children[0].active = !1)
