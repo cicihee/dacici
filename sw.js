@@ -1,4 +1,4 @@
-const CACHE = 'dacici-v4';
+const CACHE = 'dacici-v5';
 self.addEventListener('install', function () { self.skipWaiting(); });
 self.addEventListener('activate', function (e) {
   e.waitUntil(
@@ -31,7 +31,7 @@ self.addEventListener('fetch', function (e) {
   e.respondWith(
     caches.open(CACHE).then(function (cache) {
       return cache.match(req).then(function (hit) {
-        var net = fetch(req).then(function (res) {
+        var net = fetch(req, { cache: 'reload' }).then(function (res) {
           if (res && res.status === 200 && (res.type === 'basic' || res.type === 'default')) {
             cache.put(req, res.clone());
           }
