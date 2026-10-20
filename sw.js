@@ -1,4 +1,4 @@
-const CACHE = 'dacici-v3';
+const CACHE = 'dacici-v4';
 self.addEventListener('install', function () { self.skipWaiting(); });
 self.addEventListener('activate', function (e) {
   e.waitUntil(
@@ -12,6 +12,22 @@ self.addEventListener('fetch', function (e) {
   if (req.method !== 'GET') return;
   var url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
+
+  if (req.mode === 'navigate') {
+    e.respondWith(
+      fetch(req).then(function (res) {
+        if (res && res.status === 200) {
+          var copy = res.clone();
+          caches.open(CACHE).then(function (c) { c.put(req, copy); });
+        }
+        return res;
+      }).catch(function () {
+        return caches.match(req);
+      })
+    );
+    return;
+  }
+
   e.respondWith(
     caches.open(CACHE).then(function (cache) {
       return cache.match(req).then(function (hit) {
