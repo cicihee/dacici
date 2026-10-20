@@ -71,6 +71,7 @@
     <link rel="stylesheet" type="text/css" href="style-mobile.css" />
     <style>
         html, body { margin: 0; height: 100%; overflow: hidden; background: #ffe89d; }
+        body { justify-content: center; align-items: center; }
         #canvasDiv { position: relative; margin: 0 auto; }
         #GameCanvas { display: block; }
     </style>
@@ -156,13 +157,17 @@
         onload();
 
         function onload() {
-            var winWidth = document.documentElement.clientWidth;
-            var winHeight = document.documentElement.clientHeight;
+            var vv = window.visualViewport;
+            var availW = vv ? vv.width : document.documentElement.clientWidth;
+            var availH = vv ? vv.height : document.documentElement.clientHeight;
+            var dw = 720, dh = 1560;
+            var s = Math.min(availW / dw, availH / dh);
             var div = document.getElementById("canvasDiv");
-            div.style.width = winWidth > winHeight ? Math.round(winHeight * 720 / 1280) + "px" : "100%";
-            div.style.height = winHeight + "px";
+            div.style.width = Math.round(dw * s) + "px";
+            div.style.height = Math.round(dh * s) + "px";
         };
         window.addEventListener("resize", onload);
+        if (window.visualViewport) { window.visualViewport.addEventListener("resize", onload); }
         window.onload = function() {
             document.getElementById("block-Box").style.display = "none";
         }
