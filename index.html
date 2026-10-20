@@ -62,13 +62,13 @@
         }
     </script>-->
 
-    <link rel="preload" as="script" href="cocos2d-js-min.js" />
+    <link rel="preload" as="script" href="cocos2d-js-min.js?v=9" />
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js').catch(function () {});
         }
     </script>
-    <link rel="stylesheet" type="text/css" href="style-mobile.css" />
+    <link rel="stylesheet" type="text/css" href="style-mobile.css?v=9" />
     <style>
         html, body { margin: 0; height: 100%; overflow: hidden; background: #ffe89d; }
         body { justify-content: center; align-items: center; }
@@ -236,12 +236,12 @@
 
 
 
-    <script type="text/javascript" src="ads.js"></script>
-    <script src="src/config.js" charset="utf-8"></script>
-    <script src="src/lb-config.js" charset="utf-8"></script>
-    <script src="src/leaderboard.js" charset="utf-8"></script>
+    <script type="text/javascript" src="ads.js?v=9"></script>
+    <script src="src/config.js?v=9" charset="utf-8"></script>
+    <script src="src/lb-config.js?v=9" charset="utf-8"></script>
+    <script src="src/leaderboard.js?v=9" charset="utf-8"></script>
 
-    <script src="main.js" charset="utf-8"></script>
+    <script src="main.js?v=9" charset="utf-8"></script>
 
 
     <script>
@@ -267,7 +267,7 @@
 
             var cocos2d = document.createElement('script');
             cocos2d.async = true;
-            cocos2d.src = window._CCSettings.debug ? 'cocos2d-js.js' : 'cocos2d-js-min.js';
+            cocos2d.src = window._CCSettings.debug ? 'cocos2d-js.js?v=9' : 'cocos2d-js-min.js?v=9';
 
             var engineLoaded = function() {
                 document.body.removeChild(cocos2d);
