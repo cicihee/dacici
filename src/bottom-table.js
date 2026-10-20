@@ -1,11 +1,7 @@
-/* 全宽桌面覆盖层：盖住游戏内偏窄/偏移的桌子 */
+/* 桌面覆盖层：宽度=游戏画布/碰撞范围，纯色，无条纹 */
 (function () {
   var style = document.createElement("style");
-  style.textContent = [
-    "#bottom-table{position:fixed;left:0;right:0;z-index:6;pointer-events:none;",
-    "background:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 7px,rgba(255,255,255,.04) 7px 14px),linear-gradient(#d2ab70,#7b4a1d);",
-    "box-shadow:inset 0 3px 0 rgba(0,0,0,.30),inset 0 7px 0 rgba(255,255,255,.07);}"
-  ].join("");
+  style.textContent = "#bottom-table{position:fixed;z-index:6;pointer-events:none;background:#b07b3f;}";
   document.head.appendChild(style);
 
   var el = document.createElement("div");
@@ -17,13 +13,12 @@
     if (!c) return;
     var r = c.getBoundingClientRect();
     if (r.height <= 0) return;
-    var vv = window.visualViewport;
     var top = r.top + r.height * 0.8382;
     var h = Math.max(0, r.bottom - top);
+    el.style.left = Math.round(r.left) + "px";
+    el.style.width = Math.round(r.width) + "px";
     el.style.top = Math.round(top) + "px";
     el.style.height = Math.round(h) + "px";
-    el.style.left = (vv ? Math.round(vv.offsetLeft) : 0) + "px";
-    el.style.width = Math.round(vv ? vv.width : window.innerWidth) + "px";
   }
 
   if (document.readyState === "loading") {
