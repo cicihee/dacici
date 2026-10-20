@@ -1277,6 +1277,8 @@ window.__require = function e(t, n, o) {
         },
           // 生成水果
           t.prototype.createOneFruit = function (e) {
+            var _D = d.default.Instance;
+            if (_D && _D.fruit && _D.fruit.length > 9) { _D.fruit = _D.fruit.slice(2); _D.fruitL = (_D.fruitL || []).slice(2); _D.guozhiZ = (_D.guozhiZ || []).slice(2); _D.guozhiL = (_D.guozhiL || []).slice(2); }
             var t = this, n = cc.instantiate(this.fruitPre);
             n.getComponent(cc.Sprite).spriteFrame = d.default.Instance.fruit[e];
             n.children[0].getComponent(cc.Sprite).spriteFrame = d.default.Instance.fruit[e];
@@ -1316,7 +1318,7 @@ window.__require = function e(t, n, o) {
           }).start(), n.Instance.fruitHeigth = n.Instance.findHighestFruit()
         }, t.prototype.createFruitSui = function (e, t) {
         }, t.prototype.createFruitL = function (e, t, n) {
-          u.default.Instance.Play(3, !1, .5), u.default.Instance.Play(6, !1, .3);
+          u.default.Instance.Play(1, !1, 1);
         }, t.prototype.levelUpEffect = function () {
           for (var e = 0; e < 25; e++) {
             var t = r.default.Spawn("lightEffect", this.downEffect);
@@ -2185,7 +2187,7 @@ window.__require = function e(t, n, o) {
             if (a.playNum >= 1) return;
             a.playNum++
           }
-          a.launchScene = e, a.Bros = t, a.caS = n, this.curType = 1, this.getHttpGameId(), this.gamePV_load(), console.log("thisg", this.gameHttpId), o.httpInitUrl(this.gameHttpId);
+          a.launchScene = e, a.Bros = t, a.caS = n, this.curType = 1, this.getHttpGameId(), console.log("thisg", this.gameHttpId), o.httpInitUrl(this.gameHttpId);
           var c = this.initLanguage();
           this.gameNameText = c.game_name, this.gameInfoText = c.game_info, this.txtStartText = c.txtStart, this.txtMoreText = c.txtMore, this.txtAgainText = c.txtAgain, this.gameEndLText = c.gameEndL, this.gameEndL1Text = c.gameEndL1, this.bgLayRgb = c.bgRgb, this.gameEndName1 = c.gameT2, this.gameEndName2 = c.gameT3, this.gameEndUrl1 = c.gameUrl1, this.gameEndUrl2 = c.gameUrl2, this.langugeType = this.curType, i.goToCover(this.adShowBefore, this.adShowAfter, e, t, n)
         },
@@ -3557,7 +3559,7 @@ window.__require = function e(t, n, o) {
             var c = this.fruitNumber,
               r = n.node.getComponent("fruitData").fruitNumber;
             // 控制合成水果的边界值
-            var border = reverseLevelUp ? 1 : 9;
+            var border = reverseLevelUp ? 1 : 7;
             // 控制合成水果后的升级逻辑
             var fruitVolume = reverseLevelUp ? -1 : 1;
             // 合成水果，水果下标 0-9 (0 为葡萄，9 为半个西瓜，有一些特殊逻辑)
@@ -3591,13 +3593,13 @@ window.__require = function e(t, n, o) {
                   opacity: 150
                 }).start();
                 var c = new cc.Node;
-                c.addComponent(cc.Sprite).spriteFrame = l.default.Instance.fruit[reverseLevelUp ? 0 : 10], c.parent = cc.find("Canvas/upEffectParent"), c.position = cc.v2(0, -500), c.scale = 0;
+                c.addComponent(cc.Sprite).spriteFrame = l.default.Instance.fruit[reverseLevelUp ? 0 : 8], c.parent = cc.find("Canvas/upEffectParent"), c.position = cc.v2(0, -500), c.scale = 0;
                 var r = new cc.Node;
                 r.addComponent(cc.Sprite).spriteFrame = l.default.Instance.caidia[6], r.scale = 3, r.parent = c, r.position = cc.v2(0), cc.tween(r).by(5, {
                   angle: 360
                 }).repeatForever().start();
                 var s = new cc.Node;
-                s.addComponent(cc.Sprite).spriteFrame = l.default.Instance.fruit[reverseLevelUp ? 0 : 10], s.parent = c, s.position = cc.v2(0), d.default.Instance.Play(4, !1, 1), i.default.Instance.ribbonEffect(cc.v2(0, 0)), c.runAction(cc.sequence(cc.spawn(cc.jumpBy(1, 0, 0, 300, 1), cc.scaleTo(1, 1)), cc.delayTime(1), cc.spawn(cc.moveTo(1, cc.v2(0, 500)), cc.scaleTo(1, 0)), cc.callFunc(function () {
+                s.addComponent(cc.Sprite).spriteFrame = l.default.Instance.fruit[reverseLevelUp ? 0 : 8], s.parent = c, s.position = cc.v2(0), d.default.Instance.Play(4, !1, 1), i.default.Instance.ribbonEffect(cc.v2(0, 0)), c.runAction(cc.sequence(cc.spawn(cc.jumpBy(1, 0, 0, 300, 1), cc.scaleTo(1, 1)), cc.delayTime(1), cc.spawn(cc.moveTo(1, cc.v2(0, 500)), cc.scaleTo(1, 0)), cc.callFunc(function () {
                   a.default.score += 100, u.default.Instance.SetScoreTween(a.default.score), e.active = !1, a.default.playerTouch = !0, c.destroy()
                 }))), function (a, b) { setTimeout(function () { [a, b].forEach(function (x) { if (cc.isValid(x)) { x.active = !1; x.parent && (x.parent = cc.find("Canvas")) } }) }, 0) }(n.node, t.node)
               }).start()))
