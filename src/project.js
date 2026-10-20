@@ -1240,7 +1240,7 @@ window.__require = function e(t, n, o) {
             (function () {
               var _tb = cc.find("Canvas/bgLayer/down"), _sp = _tb && _tb.getComponent(cc.Sprite);
               if (!_sp) return;
-              cc.loader.load({ url: "res/raw-assets/eb/ebdc0e91-9eb2-40b6-8211-5061a73bb542.png?v=12", type: "png" }, function (e, t) {
+              cc.loader.load({ url: "res/raw-assets/eb/ebdc0e91-9eb2-40b6-8211-5061a73bb542.png?v=13", type: "png" }, function (e, t) {
                 if (!e && t && cc.isValid(_sp)) _sp.spriteFrame = new cc.SpriteFrame(t);
               });
             })(),
@@ -1254,8 +1254,15 @@ window.__require = function e(t, n, o) {
                   var l = cc.find("Canvas/bgLayer/left"), r = cc.find("Canvas/bgLayer/right");
                   if (l) l.x = -Math.round(w / 2 + 30);
                   if (r) r.x = Math.round(w / 2 + 30);
+                  ["Bg Camera", "Main Camera", "Ui Camera"].forEach(function (nm) {
+                    var cn = cc.find("Canvas/" + nm), cam = cn && cn.getComponent(cc.Camera);
+                    if (cam) cam.backgroundColor = new cc.Color(255, 232, 157);
+                  });
                   var d = cc.find("Canvas/bgLayer/down");
-                  if (d && Math.abs(d.width - w) > 1) { d.width = w; d.x = 0; var bx = d.getComponent(cc.PhysicsBoxCollider); if (bx) { bx.size.width = w; bx.apply(); } }
+                  if (d) {
+                    if (Math.abs(d.width - w) > 1) { d.width = w; d.x = 0; var bx = d.getComponent(cc.PhysicsBoxCollider); if (bx) { bx.size.width = w; bx.apply(); } }
+                    if (Math.abs(d.y + 840) > 1) d.y = -840;
+                  }
                 } catch (e) {}
               };
               fix(); setInterval(fix, 800);
