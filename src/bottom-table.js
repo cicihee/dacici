@@ -17,7 +17,8 @@
     if (!scene || scene.name !== "MainGameScene") { el.style.display = "none"; return; }
 
     var visH = (cc.view && cc.view.getVisibleSize) ? cc.view.getVisibleSize().height : 1560;
-    var frac = 0.5 + 528 / visH;
+    var down = cc.find("Canvas/bgLayer/down");
+    var frac = down ? (0.5 - (down.y + down.height / 2) / visH) : (0.5 + 528 / visH);
     if (frac < 0.7) frac = 0.7;
     if (frac > 0.95) frac = 0.95;
 
