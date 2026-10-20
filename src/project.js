@@ -1292,7 +1292,8 @@ window.__require = function e(t, n, o) {
             }
             n.getComponent(cc.RigidBody).active = false;
             n.parent = this.lineNode;
-            n.position = this.lineNode.children[1].position;
+            var _pp = this.lineNode.children[1].position;
+            n.position = cc.v2(_pp.x, 10 + n.height / 2);
             n.scale = 0;
             cc.tween(n).to(.5, {scale: 1}, {
               easing: "backOut"
