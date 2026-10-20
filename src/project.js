@@ -3604,6 +3604,15 @@ window.__require = function e(t, n, o) {
                   a.default.score += 100, u.default.Instance.SetScoreTween(a.default.score), e.active = !1, a.default.playerTouch = !0, c.destroy()
                 }))), function (a, b) { setTimeout(function () { [a, b].forEach(function (x) { if (cc.isValid(x)) { x.active = !1; x.parent && (x.parent = cc.find("Canvas")) } }) }, 0) }(n.node, t.node)
               }).start()))
+            if (c == r && c == (reverseLevelUp ? 0 : 8)) {
+              this.pengzhuangCount += 1;
+              0 == t.node.getComponent("fruitData").getNumber() && (this.node._merging = !0, n.node._merging = !0,
+                a.default.score += 100, u.default.Instance.SetScoreTween(a.default.score),
+                d.default.Instance.Play(4, !1, 1),
+                i.default.Instance.createFruitSui(o.fruitNumber, n.node.position),
+                i.default.Instance.createFruitL(o.fruitNumber, n.node.position, n.node.width),
+                function (a, b) { setTimeout(function () { [a, b].forEach(function (x) { if (cc.isValid(x)) { x.active = !1; x.parent && (x.parent = cc.find("Canvas")) } }) }, 0) }(n.node, t.node))
+            }
           }
         }, t.prototype.createBoom = function () {
           var e = r.default.Spawn("boom", cc.find("Canvas/upEffectParent"));
