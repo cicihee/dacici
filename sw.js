@@ -1,4 +1,4 @@
-const CACHE = 'dacici-v9';
+const CACHE = 'dacici-v10';
 self.addEventListener('install', function () { self.skipWaiting(); });
 self.addEventListener('activate', function (e) {
   e.waitUntil(
