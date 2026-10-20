@@ -62,6 +62,12 @@
         }
     </script>-->
 
+    <link rel="preload" as="script" href="cocos2d-js-min.js" />
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(function () {});
+        }
+    </script>
     <link rel="stylesheet" type="text/css" href="style-mobile.css" />
     <style>
         html, body { margin: 0; height: 100%; overflow: hidden; background: #ffe89d; }
